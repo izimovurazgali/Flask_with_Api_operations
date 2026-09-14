@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ApiHomework</title>
+</head>
+
+<body>
+
+
+<form action="/get_group" method="POST">
+
+    <label for="group">
+        Enter group:
+    </label>
+
+    <input
+        type="text"
+        id="group"
+        name="group"
+        required
+    >
+
+    <button type="submit">
+        Submit
+    </button>
+
+</form>
+
+
+{% for homework in homeworks %}
+
+    <div>
+
+        <h1 class="title">
+            {{ homework.title }}
+        </h1>
+
+        <div class="group">
+            {{ homework.pinned_group }}
+        </div>
+
+        <p class="body">
+            {{ homework.body }}
+        </p>
+
+        <img
+            src="{{ homework.header_url }}"
+            alt="Homework image"
+        >
+
+    </div>
+
+{% endfor %}
+</body>
+</html>
