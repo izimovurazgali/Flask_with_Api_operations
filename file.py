@@ -60,7 +60,7 @@ def get_homework():
             'pinned_group': homework.pinned_group,
             'header_url': homework.header_url
         }
-        result.append(homework_dict)
+            result.append(homework_dict)
     return jsonify(result), 200
 
 
@@ -68,12 +68,21 @@ def get_homework():
 @app.route('/get_group', methods=['GET', 'POST'])
 def get_group():
     result = []
-
+    count = 0
+    find_group = False
     if request.method == 'POST':
         group = request.form.get('group')
         for homework in homeworks:
+            count += 1
             if homework.pinned_group == group:
                 result.append(homework)
+                find_group = True
+        if count == 0:
+            return "No such of Homeworks", 404
+        if find_group == False:
+            return "Group not found", 404
+        
+        
 
     print(result)
     return render_template(
